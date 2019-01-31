@@ -1,0 +1,3 @@
+molecule/*/credentials/**
+molecule/*/credentials/**
+.tox
