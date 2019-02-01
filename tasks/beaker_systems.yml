@@ -19,7 +19,6 @@
     --power-password={{ item.power_password }}
     {{ item['fqdn'] }}
   when:
-    - systems.rc == 0
     - "item['fqdn'] not in systems.stdout_lines"
   become: true
   loop: '{{ beaker_lab.systems }}'

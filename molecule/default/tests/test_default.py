@@ -39,6 +39,13 @@ def test_labcontrol_is_populated(host):
         assert ret.stdout
 
 
+def test_beaker_system_list(host):
+    with host.sudo():
+        ret = host.run('bkr system-list')
+        assert ret.rc == 0
+        assert 'vm001.dci.io' in ret.stdout
+
+
 def test_beaker_tasks_list(host):
     tasks_expected = {
         '/distribution/check-install',
