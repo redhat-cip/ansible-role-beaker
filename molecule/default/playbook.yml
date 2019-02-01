@@ -1,5 +1,23 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: ansible-role-beaker
+  tasks:
+    - import_role:
+        name: ansible-role-beaker
+      vars:
+        beaker_lab:
+          fqdn: "{{ ansible_nodename }}"
+          listen_address: "{{ ansible_default_ipv4.address }}"
+          dhcp_start: 192.168.100.50
+          dhcp_end: 192.168.100.60
+          dhcp_netmask: 255.255.255.0
+          router: 192.168.100.1
+          systems:
+            - fqdn: vm001.dci.io
+              mac_address: 52:54:00:00:00:01
+              ip_address: 192.168.100.51
+              arch: x86_64
+              power_type: ipmitool
+              power_user: foo
+              power_passord: bar
+              power_address: 192.168.42.100
