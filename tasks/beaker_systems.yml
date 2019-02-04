@@ -17,6 +17,7 @@
     --power-address={{ item.power_address }}
     --power-user={{ item.power_user }}
     --power-password={{ item.power_password }}
+    --power-id={{ item.power_id | default(item.fqdn) }}
     {{ item['fqdn'] }}
   when:
     - systems.rc == 0
