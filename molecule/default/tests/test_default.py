@@ -27,6 +27,37 @@ def test_httpd_running_and_enabled(host):
     assert service.is_enabled
 
 
+def test_mariadb_default_charset(host):
+    f = host.file('/etc/my.cnf')
+    assert f.exists
+    assert f.is_file
+    assert f.user == 'root'
+    assert f.group == 'root'
+    assert f.mode == 0o644
+    assert f.contains('character-set-server = utf8')
+
+
+def test_mariadb_running_and_enabled(host):
+    service = host.service('mariadb')
+    assert service.is_running
+    assert service.is_enabled
+
+
+def test_mariadb_package(host):
+    package = host.package('mariadb-server')
+    assert package.is_installed
+
+
+def test_mariadb_unix_socket(host):
+    socket = host.socket('unix:///var/lib/mysql/mysql.sock')
+    assert socket.is_listening
+
+
+def test_mariadb_tcp_socket(host):
+    socket = host.socket('tcp://0.0.0.0:3306')
+    assert socket.is_listening
+
+
 def test_beaker_init(host):
     with host.sudo():
         assert host.run('beaker-init --check').rc == 0
