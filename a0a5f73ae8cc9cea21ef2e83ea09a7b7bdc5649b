@@ -1,0 +1,9 @@
+Code-Review+2: Gonéri Le Bouder <goneri@lebouder.net>
+Code-Review+2: François Charlier <francois.charlier@redhat.com>
+Workflow+1: François Charlier <francois.charlier@redhat.com>
+Verified+2: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-by: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-at: Tue, 05 Feb 2019 12:44:25 +0000
+Reviewed-on: https://softwarefactory-project.io/r/14945
+Project: ansible-role-beaker
+Branch: refs/heads/master
