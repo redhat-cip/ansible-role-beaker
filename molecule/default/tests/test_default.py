@@ -1,9 +1,25 @@
 import os
+import pytest
 
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+
+
+@pytest.mark.parametrize('protocol,port',[
+    ('tcp', '53'),
+    ('udp', '53'),
+    ('udp', '67'),
+    ('udp', '69'),
+    ('tcp', '80'),
+    ('tcp', '3306'),
+    ('tcp', '8000'),
+    ('unix', '/var/lib/mysql/mysql.sock')
+])
+def test_listening_socket(host, protocol, port):
+    socket = host.socket('%s://%s' % (protocol, port))
+    assert socket.is_listening
 
 
 def test_beaker_services_running_and_enabled(host):
@@ -46,16 +62,6 @@ def test_mariadb_running_and_enabled(host):
 def test_mariadb_package(host):
     package = host.package('mariadb-server')
     assert package.is_installed
-
-
-def test_mariadb_unix_socket(host):
-    socket = host.socket('unix:///var/lib/mysql/mysql.sock')
-    assert socket.is_listening
-
-
-def test_mariadb_tcp_socket(host):
-    socket = host.socket('tcp://0.0.0.0:3306')
-    assert socket.is_listening
 
 
 def test_beaker_init(host):
