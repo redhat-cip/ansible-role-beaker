@@ -15,16 +15,43 @@ def test_beaker_services_running_and_enabled(host):
         assert service.is_enabled
 
 
+def test_beakerd_tcp_socket(host):
+    socket = host.socket('tcp://:::8000')
+    assert socket.is_listening
+
+
 def test_dnsmasq_running_and_enabled(host):
     service = host.service('dnsmasq')
     assert service.is_running
     assert service.is_enabled
 
 
+def test_dns_all_socket(host):
+    tcp = host.socket('tcp://:::53')
+    udp = host.socket('udp://:::53')
+    assert tcp.is_listening
+    assert udp.is_listening
+
+
+def test_dhcp_udp_socket(host):
+    socket = host.socket('udp://:::67')
+    assert socket.is_listening
+
+
+def test_tftp_udp_socket(host):
+    socket = host.socket('udp://:::69')
+    assert socket.is_listening
+
+
 def test_httpd_running_and_enabled(host):
     service = host.service('httpd')
     assert service.is_running
     assert service.is_enabled
+
+
+def test_httpd_tcp_socket(host):
+    socket = host.socket('tcp://:::80')
+    assert socket.is_listening
 
 
 def test_mariadb_default_charset(host):
