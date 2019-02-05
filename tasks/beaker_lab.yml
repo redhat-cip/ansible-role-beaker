@@ -97,15 +97,29 @@
     mode: 0755
   become: true
 
-- name: Copy add_new_powertype.sh
-  copy:
-    src: files/add_new_powertype.sh
-    dest: /root/add_new_powertype.sh
-    mode: 0700
-  become: true
+- name: Generate a token from beaker
+  uri:
+    url: http://localhost/bkr/login
+    method: POST
+    body:
+      user_name: '{{ beaker_admin_login }}'
+      password: '{{ beaker_admin_password }}'
+      login: 1
+    body_format: form-urlencoded
+    status_code: 302
+  register: login
 
-- name: Make sure the ipmitool_lanplus power_type exists [copy hack script]
-  shell: /root/add_new_powertype.sh "{{ beaker_admin_login }}" "{{ beaker_admin_password }}" ipmitool_lanplus 2>&1 > /root/add_new_powertype.log
-  args:
-    creates: /root/add_new_powertype.log
-  become: true
+- name: Add the ipmitool_lanplus powertype
+  uri:
+    url: http://localhost/bkr/powertypes/
+    method: POST
+    body:
+      name: ipmitool_lanplus
+    body_format: json
+    headers:
+      Accept: application/json
+      Content-Type: application/json
+      Cookie: '{{ login.set_cookie }}'
+    status_code: [201, 409]
+  changed_when: powertypes.status == 201
+  register: powertypes
