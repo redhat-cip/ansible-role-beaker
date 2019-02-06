@@ -1,9 +1,9 @@
 Name:       ansible-role-beaker
-Version:    0.0.1
+Version:    0.0.VERS
 Release:    1%{?dist}
 Summary:    ansible-role-beaker
 License:    ASL 2.0
-URL:        https://github.com/Spredzy/ansible-role-beaker
+URL:        https://github.com/redhat-cip/ansible-role-beaker
 Source0:    ansible-role-beaker-%{version}.tar.gz
 
 BuildArch:  noarch
