@@ -20,7 +20,6 @@
     --power-id={{ item.power_id | default(item.fqdn) }}
     {{ item['fqdn'] }}
   when:
-    - systems.rc == 0
     - "item['fqdn'] not in systems.stdout_lines"
   become: true
   loop: '{{ beaker_lab.systems }}'
