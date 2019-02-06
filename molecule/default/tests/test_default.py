@@ -22,23 +22,12 @@ def test_listening_socket(host, protocol, port):
     assert socket.is_listening
 
 
-def test_beaker_services_running_and_enabled(host):
-    services = ['beaker-provision', 'beaker-proxy',
-                'beaker-watchdog', 'beakerd']
-    for service_name in services:
-        service = host.service(service_name)
-        assert service.is_running
-        assert service.is_enabled
-
-
-def test_dnsmasq_running_and_enabled(host):
-    service = host.service('dnsmasq')
-    assert service.is_running
-    assert service.is_enabled
-
-
-def test_httpd_running_and_enabled(host):
-    service = host.service('httpd')
+@pytest.mark.parametrize('service_name', [
+    'beakerd', 'beaker-provision', 'beaker-proxy',
+    'beaker-watchdog', 'dnsmasq', 'httpd', 'mariadb'
+])
+def test_services_running_and_enabled(host, service_name):
+    service = host.service(service_name)
     assert service.is_running
     assert service.is_enabled
 
@@ -51,12 +40,6 @@ def test_mariadb_default_charset(host):
     assert f.group == 'root'
     assert f.mode == 0o644
     assert f.contains('character-set-server = utf8')
-
-
-def test_mariadb_running_and_enabled(host):
-    service = host.service('mariadb')
-    assert service.is_running
-    assert service.is_enabled
 
 
 def test_mariadb_package(host):
