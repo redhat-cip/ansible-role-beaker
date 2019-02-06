@@ -32,6 +32,15 @@ def test_services_running_and_enabled(host, service_name):
     assert service.is_enabled
 
 
+@pytest.mark.parametrize('package_name', [
+    'beaker-client', 'beaker-lab-controller', 'beaker-server',
+    'dnsmasq', 'httpd', 'mariadb-server'
+])
+def test_package_installed(host, package_name):
+   package = host.package(package_name)
+   assert package.is_installed
+
+
 def test_mariadb_default_charset(host):
     f = host.file('/etc/my.cnf')
     assert f.exists
@@ -40,11 +49,6 @@ def test_mariadb_default_charset(host):
     assert f.group == 'root'
     assert f.mode == 0o644
     assert f.contains('character-set-server = utf8')
-
-
-def test_mariadb_package(host):
-    package = host.package('mariadb-server')
-    assert package.is_installed
 
 
 def test_beaker_init(host):
