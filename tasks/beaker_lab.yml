@@ -11,14 +11,23 @@
     - restart httpd
 
 - name: Verify if the labcontroller exists
-  shell: 'bkr labcontroller-list | grep "^{{ beaker_lab.fqdn }}$"'
+  shell: |
+    set -o pipefail
+    bkr labcontroller-list | grep "^{{ beaker_lab.fqdn }}$"
+  args:
+    warn: false
+    executable: /bin/bash
   register: labcontrollers
   changed_when: false
   failed_when: false
   become: true
 
 - name: Register the labcontroller
-  shell: bkr labcontroller-create --fqdn {{ beaker_lab.fqdn }} --user host/labctrl --password labctrl --email {{ beaker_admin_email }} > /root/bkr_labcontroler-create_{{ beaker_lab.fqdn }}
+  shell: >
+      bkr labcontroller-create --fqdn {{ beaker_lab.fqdn }}
+      --user host/labctrl --password labctrl
+      --email {{ beaker_admin_email }}
+      > /root/bkr_labcontroler-create_{{ beaker_lab.fqdn }}
   when: "labcontrollers.rc != 0"
   become: true
 
@@ -102,8 +111,8 @@
     url: http://localhost/bkr/login
     method: POST
     body:
-      user_name: '{{ beaker_admin_login }}'
-      password: '{{ beaker_admin_password }}'
+      user_name: "{{ beaker_admin_login }}"
+      password: "{{ beaker_admin_password }}"
       login: 1
     body_format: form-urlencoded
     status_code: 302
@@ -119,7 +128,7 @@
     headers:
       Accept: application/json
       Content-Type: application/json
-      Cookie: '{{ login.set_cookie }}'
+      Cookie: "{{ login.set_cookie }}"
     status_code: [201, 409]
   changed_when: powertypes.status == 201
   register: powertypes
