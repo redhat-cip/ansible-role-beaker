@@ -7,7 +7,12 @@
 
 - name: Parse rpms list
   set_fact:
-    rpms: "{{ beaker_tasks.content.split('\n')|select('search', '<tr>')|map('regex_replace', '<tr><td class=\"n\"><a href=\"(.*.rpm)\">.*</td></tr>', '\\1')|list }}"
+    rpms: >
+        "{{ beaker_tasks.content.split('\n')|
+        select('search', '<tr>')|
+        map('regex_replace',
+        '<tr><td class=\"n\">
+        <a href=\"(.*.rpm)\">.*</td></tr>', '\\1')|list }}"
 
 - name: Fetch Beaker default tasks
   get_url:
