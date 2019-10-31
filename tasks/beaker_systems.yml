@@ -18,6 +18,7 @@
     --power-user={{ item.power_user }}
     --power-password={{ item.power_password }}
     --power-id={{ item.power_id | default(item.fqdn) }}
+    --condition=Automated
     {{ item['fqdn'] }}
   when:
     - "item['fqdn'] not in systems.stdout_lines"
