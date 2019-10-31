@@ -29,7 +29,7 @@
     beaker-init
     --user {{ beaker_admin_login | quote }}
     --password {{ beaker_admin_password | quote }}
-    --email {{ beaker_admin_email | quote}}
+    --email {{ beaker_admin_email | quote }}
     --fullname {{ beaker_admin_fullname | quote }}
   when: beaker_init_result is failed
   become: true
