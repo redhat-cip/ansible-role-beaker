@@ -71,7 +71,9 @@ def test_beaker_system_list(host):
 
 
 def test_beaker_tasks_list(host):
+    # stdout is produced with an extra \n, so need ''
     tasks_expected = {
+        '',
         '/distribution/check-install',
         '/distribution/command',
         '/distribution/install',

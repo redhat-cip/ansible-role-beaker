@@ -9,6 +9,7 @@ platforms:
       - SYS_ADMIN
       - NET_ADMIN
 provisioner:
+  log: true
   name: ansible
   connection_options:
     ansible_user: centos
