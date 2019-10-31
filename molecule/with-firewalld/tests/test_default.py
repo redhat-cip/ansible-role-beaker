@@ -18,8 +18,9 @@ def test_iptables_rules(host, port):
     open_ports = set()
 
     for rule in rules:
+        print(rule)
         m = re.search(
-            '--dport (\d+) -m conntrack --ctstate NEW -j ACCEPT',
+            r'--dport (\d+) -m conntrack --ctstate NEW,UNTRACKED -j ACCEPT',
             rule)
         if m:
             open_ports.add(m.group(1))
