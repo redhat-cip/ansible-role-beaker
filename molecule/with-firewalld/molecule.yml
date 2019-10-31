@@ -10,6 +10,7 @@ platforms:
       - NET_ADMIN
 provisioner:
   name: ansible
+  log: true
   connection_options:
     ansible_user: centos
   lint:
