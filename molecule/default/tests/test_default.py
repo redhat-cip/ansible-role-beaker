@@ -90,7 +90,7 @@ def test_beaker_tasks_list(host):
     }
     with host.sudo():
         bkr_task_list_ret = host.run('bkr task-list')
-        tasks_found = set(bkr_task_list_ret.stdout.split('\n'))
+        tasks_found = set(bkr_task_list_ret.stdout.rstrip('\n').split('\n'))
         assert tasks_found == tasks_expected
 
 
