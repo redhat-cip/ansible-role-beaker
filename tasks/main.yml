@@ -1,17 +1,17 @@
 ---
-- import_tasks: tasks/prerequisites.yml
+- import_tasks: prerequisites.yml
   tags: [ prereqs ]
-- import_tasks: tasks/database.yml
+- import_tasks: database.yml
   tags: [ db, beakerd ]
-- import_tasks: tasks/beaker_common.yml
+- import_tasks: beaker_common.yml
   tags: [ repos ]
-- import_tasks: tasks/beakerd.yml
+- import_tasks: beakerd.yml
   tags: [ beakerd ]
-- import_tasks: tasks/httpd.yml
+- import_tasks: httpd.yml
   tags: [ beakerd, lab ]
-- import_tasks: tasks/beaker_lab.yml
+- import_tasks: beaker_lab.yml
   tags: [ lab ]
-- import_tasks: tasks/beaker_tasks.yml
+- import_tasks: beaker_tasks.yml
   tags: [ tasks ]
-- import_tasks: tasks/beaker_systems.yml
+- import_tasks: beaker_systems.yml
   tags: [ systems ]
