@@ -74,7 +74,6 @@ def test_beaker_tasks_list(host):
     tasks_expected = {
         '/distribution/check-install',
         '/distribution/command',
-        '/distribution/install',
         '/distribution/inventory',
         '/distribution/pkginstall',
         '/distribution/rebuild',
