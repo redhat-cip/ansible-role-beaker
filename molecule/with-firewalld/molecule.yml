@@ -1,9 +1,17 @@
 ---
-lint:
-  name: yamllint
+lint: |
+  yamllint tasks
+driver:
+  name: podman
 platforms:
-  - name: $TOX_ENVNAME
-    image: centos/systemd:latest
+  - name: el7
+    image: centos:7
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+      - NET_ADMIN
+  - name: el8
+    image: centos:8
     command: /sbin/init
     capabilities:
       - SYS_ADMIN
