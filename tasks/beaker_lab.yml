@@ -106,6 +106,13 @@
     mode: 0755
   become: true
 
+- name: Install redfish powerscript
+  copy:
+    src: files/redfish
+    dest: /etc/beaker/power-scripts/redfish
+    mode: 0755
+  become: true
+
 - name: Generate a token from beaker
   uri:
     url: http://localhost/bkr/login
@@ -132,3 +139,18 @@
     status_code: [201, 409]
   changed_when: powertypes.status == 201
   register: powertypes
+
+- name: Add the redfish powertype
+  uri:
+    url: http://localhost/bkr/powertypes/
+    method: POST
+    body:
+      name: redfish
+    body_format: json
+    headers:
+      Accept: application/json
+      Content-Type: application/json
+      Cookie: "{{ login.set_cookie }}"
+    status_code: [201, 409]
+  changed_when: redfish_powertype.status == 201
+  register: redfish_powertype
