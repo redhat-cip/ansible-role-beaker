@@ -24,7 +24,7 @@ def test_listening_socket(host, protocol, port):
 
 @pytest.mark.parametrize('service_name', [
     'beakerd', 'beaker-provision', 'beaker-proxy',
-    'beaker-watchdog', 'dnsmasq', 'httpd', 'mariadb'
+    'beaker-watchdog', 'httpd', 'mariadb'
 ])
 def test_services_running_and_enabled(host, service_name):
     service = host.service(service_name)
@@ -34,7 +34,7 @@ def test_services_running_and_enabled(host, service_name):
 
 @pytest.mark.parametrize('package_name', [
     'beaker-client', 'beaker-lab-controller', 'beaker-server',
-    'dnsmasq', 'httpd', 'mariadb-server'
+    'httpd', 'mariadb-server'
 ])
 def test_package_installed(host, package_name):
     package = host.package(package_name)
@@ -61,13 +61,6 @@ def test_labcontrol_is_populated(host):
         ret = host.run('bkr labcontroller-list')
         assert ret.rc == 0
         assert ret.stdout
-
-
-def test_beaker_system_list(host):
-    with host.sudo():
-        ret = host.run('bkr system-list')
-        assert ret.rc == 0
-        assert 'vm001.dci.io' in ret.stdout
 
 
 def test_beaker_tasks_list(host):
