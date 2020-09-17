@@ -3,7 +3,6 @@
   package:
     name:
       - beaker-lab-controller
-      - dnsmasq
       - conserver
       - conserver-client
   become: true
@@ -39,24 +38,6 @@
     owner: root
     group: apache
   notify: restart labcontroller services
-  become: true
-
-- name: Install dnsmasq configuration file
-  template:
-    src: templates/etc/dnsmasq.d/beaker.conf.j2
-    dest: /etc/dnsmasq.d/beaker.conf
-    mode: 0644
-    owner: root
-    group: root
-  become: true
-  notify: restart dnsmasq
-
-- name: Start dnsmasq
-  service:
-    name: dnsmasq
-    state: started
-    enabled: true
-  become: true
 
 - name: Start the labcontroller services
   service:
