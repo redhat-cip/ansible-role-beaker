@@ -25,13 +25,6 @@
     - beaker-watchdog
     - beaker-provision
 
-- name: restart dnsmasq
-  service:
-    name: dnsmasq
-    enabled: true
-    state: restarted
-  become: true
-
 - name: restart beakerd
   service:
     name: beakerd
