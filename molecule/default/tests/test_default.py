@@ -7,24 +7,24 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-@pytest.mark.parametrize('protocol,port', [
-    ('tcp', '53'),
-    ('udp', '53'),
-    ('udp', '67'),
-    ('udp', '69'),
-    ('tcp', '80'),
-    ('tcp', '3306'),
-    ('tcp', '8000'),
-    ('unix', '/var/lib/mysql/mysql.sock')
-])
-def test_listening_socket(host, protocol, port):
-    socket = host.socket('%s://%s' % (protocol, port))
-    assert socket.is_listening
+#@pytest.mark.parametrize('protocol,port', [
+#    ('tcp', '53'),
+#    ('udp', '53'),
+#    ('udp', '67'),
+#    ('udp', '69'),
+#    ('tcp', '80'),
+#    ('tcp', '3306'),
+#    ('tcp', '8000'),
+#    ('unix', '/var/lib/mysql/mysql.sock')
+#])
+#def test_listening_socket(host, protocol, port):
+#    socket = host.socket('%s://%s' % (protocol, port))
+#    assert socket.is_listening
 
 
 @pytest.mark.parametrize('service_name', [
     'beakerd', 'beaker-provision', 'beaker-proxy',
-    'beaker-watchdog', 'dnsmasq', 'httpd', 'mariadb'
+    'beaker-watchdog', 'httpd', 'mariadb'
 ])
 def test_services_running_and_enabled(host, service_name):
     service = host.service(service_name)
@@ -34,7 +34,7 @@ def test_services_running_and_enabled(host, service_name):
 
 @pytest.mark.parametrize('package_name', [
     'beaker-client', 'beaker-lab-controller', 'beaker-server',
-    'dnsmasq', 'httpd', 'mariadb-server'
+    'httpd', 'mariadb-server'
 ])
 def test_package_installed(host, package_name):
     package = host.package(package_name)
