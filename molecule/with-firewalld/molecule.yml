@@ -6,8 +6,13 @@ driver:
 platforms:
   - name: el7
     image: centos:7
-    command: /sbin/init
-    privileged: True
+    command: /usr/sbin/init
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - all
+    security_opts:
+      - seccomp=unconfined
 provisioner:
   name: ansible
   log: true
