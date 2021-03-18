@@ -1,5 +1,5 @@
 ansible>=2.8,<2.9
-molecule
-molecule-podman
+molecule[podman]
+yamllint
 testinfra
 
