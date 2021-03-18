@@ -6,7 +6,7 @@ driver:
 platforms:
   - name: el7
     image: centos:7
-    command: /sbin/init
+    command: /usr/sbin/init
     privileged: True
 provisioner:
   name: ansible
