@@ -6,8 +6,12 @@ driver:
 platforms:
   - name: el7
     image: centos:7
-    command: /sbin/init
-    privileged: True
+    command: /usr/sbin/init
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - NET_ADMIN
+      - NET_RAW
 provisioner:
   name: ansible
   log: true
