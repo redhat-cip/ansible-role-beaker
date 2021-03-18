@@ -31,6 +31,7 @@
   become: true
 
 - name: Create the labcontroller configuration file
+  become: true
   template:
     src: templates/etc/beaker/labcontroller.conf.j2
     dest: /etc/beaker/labcontroller.conf
