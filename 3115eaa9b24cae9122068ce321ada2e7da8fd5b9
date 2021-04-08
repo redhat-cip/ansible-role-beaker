@@ -22,6 +22,30 @@
       "revId": "3115eaa9b24cae9122068ce321ada2e7da8fd5b9",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66f65e34_ac4a4782",
+        "filename": "molecule/with-firewalld/molecule.yml",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 642
+      },
+      "writtenOn": "2021-04-08T21:44:11Z",
+      "side": 1,
+      "message": "Yes, i mostly did it because i was following the documentation during my investigation 😊",
+      "parentUuid": "ea6d19e5_2b8790e4",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 24
+      },
+      "revId": "3115eaa9b24cae9122068ce321ada2e7da8fd5b9",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": true
     }
   ]
 }
