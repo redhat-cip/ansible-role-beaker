@@ -1,0 +1,9 @@
+Code-Review+2: François Charlier <francois.charlier@redhat.com>
+Code-Review+2: Farid Da Encarnacao <fdaencar@redhat.com>
+Workflow+1: Farid Da Encarnacao <fdaencar@redhat.com>
+Verified+2: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-by: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-at: Thu, 08 Apr 2021 22:22:43 +0000
+Reviewed-on: https://softwarefactory-project.io/r/c/ansible-role-beaker/+/21424
+Project: ansible-role-beaker
+Branch: refs/heads/master
