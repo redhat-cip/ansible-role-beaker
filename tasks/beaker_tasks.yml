@@ -26,3 +26,8 @@
   become: true
   with_items: '{{ rpms }}'
   ignore_errors: true
+
+- name: Restart beakerd service to ensure database connectivity
+  service:
+    name: beakerd
+    state: restarted
