@@ -1,6 +1,6 @@
 Name:       ansible-role-beaker
-Version:    0.0.VERS
-Release:    1%{?dist}
+Version:    0.0.2
+Release:    1.VERS%{?dist}
 Summary:    ansible-role-beaker
 License:    ASL 2.0
 URL:        https://github.com/redhat-cip/ansible-role-beaker
@@ -32,5 +32,8 @@ cp -r tasks %{buildroot}%{_datadir}/ansible/roles/beaker
 %{_datadir}/ansible/roles/beaker
 
 %changelog
+* Thu Nov  9 2023 Tony Garcia <tonyg@redhat.com> - 0.0.2-1
+- Change versioning format
+
 * Thu Jan 31 2019 Gonéri Le Bouder <goneri@redhat.com> - 0.0.1-1
 - Initial release
